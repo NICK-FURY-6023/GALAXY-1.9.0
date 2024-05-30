@@ -105,13 +105,13 @@ class ErrorHandler(commands.Cog):
 
             kwargs["embed"] = disnake.Embed(
                 color=color,
-                title = "An error occurred in the command:",
+                title="An error occurred in the command:",
                 description=f"```py\n{repr(error)[:2030].replace(self.bot.http.token, 'mytoken')}```"
             )
 
             if self.bot.config["AUTO_ERROR_REPORT_WEBHOOK"]:
                 send_webhook = True
-                kwargs["embed"].description += " `My developer will be notified of the problem.`"
+                kwargs["embed"].description += " `My developer will be notified about the issue.`"
 
         else:
 
@@ -123,7 +123,7 @@ class ErrorHandler(commands.Cog):
         try:
             await send_message(inter, components=components, **kwargs)
         except:
-            print(("-"*50) + f"\n{error_msg}\n" + ("-"*50))
+            print(("-" * 50) + f"\n{error_msg}\n" + ("-" * 50))
             traceback.print_exc()
 
         if kill_process:
@@ -233,7 +233,7 @@ class ErrorHandler(commands.Cog):
                 )
                 if self.bot.config["AUTO_ERROR_REPORT_WEBHOOK"]:
                     send_webhook = True
-                    kwargs["embed"].description += " `My developer will be notified of the problem.`"
+                    kwargs["embed"].description += " `My developer will be notified about the issue.`"
 
             else:
                 kwargs["content"] += "\n**An error occurred in the command:**\n" \
@@ -316,7 +316,7 @@ class ErrorHandler(commands.Cog):
                 ),
                 disnake.ui.TextInput(
                     style=disnake.TextInputStyle.short,
-                    label="Error image/screenshot link (Optional)",
+                    label="Image link/screenshot of the error (Optional)",
                     custom_id="image_url",
                     max_length=300,
                     required=False
@@ -370,7 +370,7 @@ class ErrorHandler(commands.Cog):
         except AttributeError:
             user_avatar = inter.author.avatar.url
 
-        embed.set_author(name=f"Error reported: {inter.author} - {inter.author.id}", icon_url=user_avatar)
+        embed.set_author(name=f"Error reported by: {inter.author} - {inter.author.id}", icon_url=user_avatar)
 
         guild_txt = f"Server: {inter.guild.name} [{inter.guild.id}]"
 
